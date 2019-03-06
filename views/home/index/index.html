@@ -1,26 +1,11 @@
 <!-- 进行引入header头部文件 -->
+{{template "home/public/header.html" .}}
 <section class="container pt-20">
 	<!--<div class="Huialert Huialert-info"><i class="Hui-iconfont">&#xe6a6;</i>成功状态提示</div>-->
   <!--left-->
   <div class="col-sm-9 col-md-9">
   	<!--滚动图-->
-  	<div class="slider_main">
-            <div class="slider">
-                <div class="bd">
-                    <ul>
-                        <li><a href="#" target="_blank"><img src="img/temp/banner1.jpg"></a></li>
-                        <li><a href="#" target="_blank"><img src="img/temp/banner8.png"></a></li>
-                    </ul>
-                </div>
-                <ol class="hd cl dots">
-                    <li>1</li>
-                    <li>2</li>
-                </ol>
-                <a class="slider-arrow prev" href="javascript:void(0)"></a>
-                <a class="slider-arrow next" href="javascript:void(0)"></a>
-            </div>
-        </div>
-  		
+	{{template "home/public/banner.html" .}}
 		<div class="mt-20 bg-fff box-shadow radius mb-5">
 			<div class="tab-category">
 				<a href=""><strong class="current">最新发布</strong></a>
@@ -30,7 +15,7 @@
 			<ul class="index_arc">
 				<li class="index_arc_item">
 					<a href="#" class="pic">
-						<img class="lazyload" data-original="temp/art.jpg" alt="应该选" />
+						<img class="lazyload" data-original="/static/home/temp/art.jpg" alt="应该选" />
 					</a>
 					<h4 class="title"><a href="article_detail.html">个人博客应该选择什么样的域名和域名后缀</a></h4>
 					<div class="date_hits">
@@ -58,7 +43,7 @@
 				
 				<li class="index_arc_item">
 	            <a href="/article/4" class="pic">
-	                <img class="lazyload" data-original="temp/art.jpg" alt="centos 6.5 nginx安装及配置" >
+	                <img class="lazyload" data-original="/static/home/temp/art.jpg" alt="centos 6.5 nginx安装及配置" >
 	            </a>
 	        <h4 class="title"><a href="/article/4">centos 6.5 nginx安装及配置</a></h4>
 	        <div class="date_hits">
@@ -75,7 +60,7 @@
          
          <li class="index_arc_item">
 					<a href="#" class="pic">
-						<img class="lazyload" data-original="temp/art.jpg" alt="应该选" />
+						<img class="lazyload" data-original="/static/home/temp/art.jpg" alt="应该选" />
 					</a>
 					<h4 class="title"><a href="article_detail.html">个人博客应该选择什么样的域名和域名后缀</a></h4>
 					<div class="date_hits">
@@ -103,7 +88,7 @@
 				
 				<li class="index_arc_item">
 	            <a href="/article/4" class="pic">
-	                <img class="lazyload" data-original="temp/art.jpg" alt="centos 6.5 nginx安装及配置" >
+	                <img class="lazyload" data-original="/static/home/temp/art.jpg" alt="centos 6.5 nginx安装及配置" >
 	            </a>
 	        <h4 class="title"><a href="/article/4">centos 6.5 nginx安装及配置</a></h4>
 	        <div class="date_hits">
@@ -120,7 +105,7 @@
           
           <li class="index_arc_item">
 					<a href="#" class="pic">
-						<img class="lazyload" data-original="temp/art.jpg" alt="应该选" />
+						<img class="lazyload" data-original="/static/home/temp/art.jpg" alt="应该选" />
 					</a>
 					<h4 class="title"><a href="article_detail.html">个人博客应该选择什么样的域名和域名后缀</a></h4>
 					<div class="date_hits">
@@ -148,7 +133,7 @@
 				
 				<li class="index_arc_item">
 	            <a href="/article/4" class="pic">
-	                <img class="lazyload" data-original="temp/art.jpg" alt="centos 6.5 nginx安装及配置" >
+	                <img class="lazyload" data-original="/static/home/temp/art.jpg" alt="centos 6.5 nginx安装及配置" >
 	            </a>
 	        <h4 class="title"><a href="/article/4">centos 6.5 nginx安装及配置</a></h4>
 	        <div class="date_hits">
@@ -165,7 +150,7 @@
           
           <li class="index_arc_item">
 					<a href="#" class="pic">
-						<img class="lazyload" data-original="temp/art.jpg" alt="应该选" />
+						<img class="lazyload" data-original="/static/home/temp/art.jpg" alt="应该选" />
 					</a>
 					<h4 class="title"><a href="article_detail.html">个人博客应该选择什么样的域名和域名后缀</a></h4>
 					<div class="date_hits">
@@ -193,7 +178,7 @@
 				
 				<li class="index_arc_item">
 	            <a href="/article/4" class="pic">
-	                <img class="lazyload" data-original="temp/art.jpg" alt="centos 6.5 nginx安装及配置" >
+	                <img class="lazyload" data-original="/static/home/temp/art.jpg" alt="centos 6.5 nginx安装及配置" >
 	            </a>
 	        <h4 class="title"><a href="/article/4">centos 6.5 nginx安装及配置</a></h4>
 	        <div class="date_hits">
@@ -215,4 +200,8 @@
 	    </div>
 		</div>
   </div>
+  <!--执行引入右侧标签 -->
+  {{template "home/public/right.html" .}}
 </section>
+<!-- 引入尾部标签操作 -->
+{{template "home/public/footer.html" .}}

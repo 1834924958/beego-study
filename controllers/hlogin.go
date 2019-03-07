@@ -23,5 +23,14 @@ func (c *HLoginController) Login(){
 //测试数据库的操作
 func (c *HLoginController) Ches(){
 	fmt.Println("车上")
-	c.Ctx.WriteString("hello,执行数据测试的操作")
+	c.Ctx.WriteString("hello,执行数据测试的操作11")
+}
+//执行注册添加数据的操作
+func (c *HLoginController) Regform(){
+			c.Ctx.WriteString("使用Post进行提交")
+	// if c.Ctx.Rquest.Method == "POST"{
+	// 		c.Ctx.WriteString("使用Post进行提交")
+	// 	}else{
+	// 		c.Ctx.WriteString("无效的提交方式")
+	// 	}
 }

@@ -16,5 +16,6 @@ func init() {
     //前台用户登录注册
     beego.Router("/home/register", &controllers.HLoginController{},"*:Register")
     beego.Router("/home/login", &controllers.HLoginController{},"*:Login")
+    beego.Router("/home/regform", &controllers.HLoginController{},"Post:Regform")
 
 }

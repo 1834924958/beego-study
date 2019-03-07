@@ -49,7 +49,8 @@
                             <ul class="dropDown-menu menu radius box-shadow">
                                 <li><a href="/app/loginOut">退出</a></li>
                             </ul>-->
-                            <a href="/app/qq" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" ><img class="avatar size-S" src="/static/home/img/qq.jpg" title="登入">登入</a>
+                            <a href="{{urlfor "HLoginController.Register"}}" title="注册" >注册</a>
+                            <a href="{{urlfor "HLoginController.Login"}}" title="登录" >登录</a>
                     </li>
                 </ul>
             </nav>

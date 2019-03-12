@@ -2,33 +2,34 @@ package controllers
 
 import (
 	"fmt"
-	"github.com/astaxie/beego/orm"
-	_ "github.com/go-sql-driver/mysql"
+	
 )
 
 type HLoginController struct{
 	BaseHomeController
 }
 
-type Huser struct {
-    Id          int       `orm:"auto"`
-    UserName    string      `orm:"size(150)"`
-    Mobile      string      `orm:"size(100)"`
-    Status      int     
-    AddTime     int
-}
-func init() {
-	orm.RegisterDataBase("default","mysql","root:123456@tcp(127.0.0.1:3306)/beegotest?charset=utf8",30)
-	orm.RegisterModel(new(Huser))
-	orm.RunSyncdb("default",false,true)
-}
+// type Huser struct {
+//     Id          int       `orm:"auto"`
+//     UserName    string      `orm:"size(150)"`
+//     Mobile      string      `orm:"size(100)"`
+//     Status      int     
+//     AddTime     int
+// }
+// func init() {
+// 	orm.RegisterDataBase("default","mysql","root:123456@tcp(127.0.0.1:3306)/beegotest?charset=utf8",30)
+// 	orm.RegisterModel(new(Huser))
+// 	orm.RunSyncdb("default",false,true)
+// }
 // func (c *IndexController) Get(){
 // 	c.TplName = "home/index/index.html"
 // 引入包:// "beego-study/models"
+// "github.com/astaxie/beego/orm"
+	// _ "github.com/go-sql-driver/mysql"
 // }
 //定义注册的操作
 func (c *HLoginController) Register(){
-	o := orm.NewOrm()
+	// o := orm.NewOrm()
 	// huser := Huser{UserName:"qwe12",Mobile:"9527",Status:2}
 	////insert
 	// id,err := o.Insert(&huser)
@@ -37,23 +38,23 @@ func (c *HLoginController) Register(){
 	// huser.Id = 3
 	// id,err := o.Update(&huser)
 	////delete
-	hu := Huser{Id:4}
+	// hu := Huser{Id:4}
 	// id,err := o.Delete(&hu)
 	////read 
-	err := o.Read(&hu)
+	// err := o.Read(&hu)
 	// fmt.Println(err)
 	// user:= Huser{UserName:"qwe12123",Mobile:"9527",Status:2}
-	user:= err
-	c.Data["json"] =user  
-	c.ServeJSON()
+	// user:= err
+	// c.Data["json"] =user  
+	// c.ServeJSON()
 	// dataList,err  := models.QueryAllUserInfo()
 	// if err == nil {
 	// 	c.Data["json"] = dataList
 	// }else{
 	// c.Ctx.WriteString("hello,执行数据测试的操作11")
 	// }
-	c.Ctx.WriteString("ches ")
-	// c.TplName = "home/login/register.html"
+	// c.Ctx.WriteString("ches ")
+	c.TplName = "home/login/register.html"
 }
 //定义登录的操作
 func (c *HLoginController) Login(){

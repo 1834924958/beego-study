@@ -2,7 +2,8 @@ package controllers
 
 import (
 	"fmt"
-	
+	"github.com/astaxie/beego/orm"
+	"beego-study/models"
 )
 
 type HLoginController struct{
@@ -30,6 +31,9 @@ type HLoginController struct{
 //定义注册的操作
 func (c *HLoginController) Register(){
 	// o := orm.NewOrm()
+	// huser := new(Huser)
+	// huser.UserName = "qwe12"
+	// fmt.Println(o.Read(huser))
 	// huser := Huser{UserName:"qwe12",Mobile:"9527",Status:2}
 	////insert
 	// id,err := o.Insert(&huser)
@@ -92,8 +96,56 @@ func (c *HLoginController) Ches(){
 func (c *HLoginController) Regform(){
 	//查询数据
 	types    := c.GetString("type")
+	Huser  := models.Huser{}
 	if (c.Ctx.Request.Method == "POST" && types == "register") {
-		c.Ctx.WriteString("post提交方式")
+		// Huser.Id = 1
+		Huser.Username = c.GetString("username")
+		Huser.Mobile  =  c.GetString("mobile")
+		Huser.Status  =  1
+		Huser.Addtime  = time.Now()
+		o := orm.NewOrm()
+		//添加
+		// if _,err := o.Insert(&Huser); err != nil{
+		// 	c.Ctx.WriteString("注册失败")
+		// }else{
+		// 	c.Ctx.WriteString("注册成功")
+		// }
+		//删除
+		// if _,err := o.Delete(&Huser); err != nil{
+		// 	c.Ctx.WriteString("删除失败")
+		// }else{
+		// 	c.Ctx.WriteString("删除成功")
+		// }
+		//更新
+		// if _,err := o.Update(&Huser); err != nil{
+		// 	c.Ctx.WriteString("更新失败")
+		// }else{
+		// 	c.Ctx.WriteString("更新成功")
+		// }
+		//查询
+				//添加
+		// if _,err := o.Insert(&Huser); err != nil{
+		// 	c.Ctx.WriteString("注册失败")
+		// }else{
+		// 	c.Ctx.WriteString("注册成功")
+		// }
+		//删除
+		// if _,err := o.Delete(&Huser); err != nil{
+		// 	c.Ctx.WriteString("删除失败")
+		// }else{
+		// 	c.Ctx.WriteString("删除成功")
+		//查询
+		// err := o.Read(&Huser)
+		// if err == nil{
+		// 	c.Ctx.WriteString("查询成功")
+		// }else{
+		// 	c.Ctx.WriteString("查询失败")
+		// }
+		// if _,err := o.Read(&Huser);{
+		// 	c.Ctx.WriteString("查询失败")
+		// }else{
+		// 	c.Ctx.WriteString("查询成功")
+		// }
 	}else{
 		c.Ctx.WriteString("无效的提交方式")
 	}

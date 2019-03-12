@@ -43,12 +43,12 @@
                     },
                     dataType:'json',
                     success:function(data){
-                        if(data.status==1){
+                        if(data.code==1){
                             layer.msg(data.msg,function(){
-                                window.location.href="/home/index/index.html";
-                            });
+                                window.location.href="/";
+                            },{icon:1});
                         }else{
-                            layer.msg(data.msg);
+                            layer.msg(data.msg,{icon:2});
                         }
                     },
                     error:function(){

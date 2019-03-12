@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"fmt"
+	"time"
 	"github.com/astaxie/beego/orm"
 	"beego-study/models"
 )
@@ -105,47 +106,11 @@ func (c *HLoginController) Regform(){
 		Huser.Addtime  = time.Now()
 		o := orm.NewOrm()
 		//添加
-		// if _,err := o.Insert(&Huser); err != nil{
-		// 	c.Ctx.WriteString("注册失败")
-		// }else{
-		// 	c.Ctx.WriteString("注册成功")
-		// }
-		//删除
-		// if _,err := o.Delete(&Huser); err != nil{
-		// 	c.Ctx.WriteString("删除失败")
-		// }else{
-		// 	c.Ctx.WriteString("删除成功")
-		// }
-		//更新
-		// if _,err := o.Update(&Huser); err != nil{
-		// 	c.Ctx.WriteString("更新失败")
-		// }else{
-		// 	c.Ctx.WriteString("更新成功")
-		// }
-		//查询
-				//添加
-		// if _,err := o.Insert(&Huser); err != nil{
-		// 	c.Ctx.WriteString("注册失败")
-		// }else{
-		// 	c.Ctx.WriteString("注册成功")
-		// }
-		//删除
-		// if _,err := o.Delete(&Huser); err != nil{
-		// 	c.Ctx.WriteString("删除失败")
-		// }else{
-		// 	c.Ctx.WriteString("删除成功")
-		//查询
-		// err := o.Read(&Huser)
-		// if err == nil{
-		// 	c.Ctx.WriteString("查询成功")
-		// }else{
-		// 	c.Ctx.WriteString("查询失败")
-		// }
-		// if _,err := o.Read(&Huser);{
-		// 	c.Ctx.WriteString("查询失败")
-		// }else{
-		// 	c.Ctx.WriteString("查询成功")
-		// }
+		if _,err := o.Insert(&Huser); err != nil{
+			c.Ctx.WriteString("注册失败")
+		}else{
+			c.jsonResult("1","注册成功","")
+		}
 	}else{
 		c.Ctx.WriteString("无效的提交方式")
 	}

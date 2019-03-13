@@ -18,5 +18,9 @@ func init() {
     beego.Router("/home/register", &controllers.HLoginController{},"*:Register")
     beego.Router("/home/login", &controllers.HLoginController{},"*:Login")
     beego.Router("/home/regform", &controllers.HLoginController{},"Post:Regform")
+    //后台用户处理的操作
+    beego.Router("/admin/index", &controllers.AindexController{},"*:Index")
+    beego.Router("/admin/main", &controllers.AindexController{},"*:Main")
+    beego.Router("/admin/info", &controllers.AindexController{},"*:Info")
 
 }

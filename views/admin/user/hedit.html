@@ -1,0 +1,87 @@
+{{template "admin/public/header.html" .}}
+<link rel="stylesheet" href="/static/layer/theme/default/layer.css">
+<link rel="stylesheet" href="/static/layui/css/layui.css">
+<div class="row">
+	<div class="col-lg-12 col-xl-6 col-md-12 col-sm-12">
+		<div class="card">
+			<div class="card-header">
+				<h4>用户编辑</h4>
+			</div>
+			<div class="card-body">
+				<form class="form-horizontal"  method="POST" >
+					<div class="form-group row">
+						<label for="inputName" class="col-md-3 col-form-label">用户ID:</label>
+						<div class="col-md-9">
+							<input type="hidden" class="form-control" placeholder="用户Id不做调整" name="Id" value="{{.hlist.Id}}" >
+							<input type="text" class="form-control" placeholder="用户Id不做调整"  value="{{.hlist.Id}}" disabled="disabled">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="inputEmail3" class="col-md-3 col-form-label">用户名:</label>
+						<div class="col-md-9">
+							<input type="text" class="form-control" id="Username" name="Username" value="{{.hlist.Username}}"  placeholder="用户名在(6~16位之间,可以包含中英文,数字)">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="inputPassword3" class="col-md-3 col-form-label">手机号:</label>
+						<div class="col-md-9">
+							<input type="text" name="Mobile" id="mobile" value="{{.hlist.Mobile}}" class="form-control"  placeholder="手机号可以是国内或者国际">
+							<input type="hidden" name="types" value="hedit" class="form-control">
+						</div>
+					</div>
+					<div class="form-group row mb-0">
+						<label class="col-md-3 col-form-label">当前状态</label>
+						<div class="col-md-9">
+							<select class="form-control" name="Status" id="Status">
+								<option value="1" {{if eq .hlist.Status 1 }}selected="selected"{{end}}>正常</option>
+								<option value="0" {{if eq .hlist.Status 0 }}selected="selected"{{end}}>冻结</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group mb-0 mt-2 row justify-ontent-end">
+						<div class="col-md-9">
+							<button type="button" onclick="Update();" class="btn btn-info">确认</button>
+							<button type="button" class="btn btn-primary">取消</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{{template "admin/public/js.html" .}}
+<script src="/static/layer/layer.js"></script>
+<script type="text/javascript">
+	//执行表单提交的操作
+	// $("#submit").click(function(){
+	// 	$("#form").submit();
+	// })
+	function Update(){
+		var username = $("#Username").val();
+		var mobile   = $("#mobile").val();
+		var status   = $('#Status option:selected').val()
+		$.ajax({
+            url:"{{urlfor "AuserController.Hstatus"}}",
+            type:'POST', 
+            data:{
+                "Id":{{.hlist.Id}},
+                "Username":username,
+                "Mobile":mobile,
+                "types":"hedit",
+                "Status":status
+            },
+            dataType:'json',
+            success:function(data){
+                if(data.code==1){
+                    layer.msg(data.msg,{icon:1});
+                }else{
+                   layer.msg(data.msg,{icon:2});
+                }
+            },
+            error:function(){
+                layer.msg("出错了");
+            }
+        })
+	}
+</script>
+{{template "admin/public/footer.html"}}

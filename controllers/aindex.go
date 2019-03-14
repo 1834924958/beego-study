@@ -1,5 +1,8 @@
 package controllers
 
+import (
+	"fmt"
+)
 
 type AindexController struct{
 	BaseAdminController
@@ -11,9 +14,6 @@ func (c *AindexController) Index(){
 
 //定义后台首页
 func (c *AindexController) Main(){
+	fmt.Println("测试112")
 	c.TplName = "admin/page/main.html"
-}
-//定义管理员用户详情
-func (c * AindexController) Info() {
-	c.TplName = "admin/page/user/info.html"
 }

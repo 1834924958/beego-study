@@ -1,17 +1,186 @@
 {{template "admin/public/header.html" .}}
-<!-- 左侧导航 -->
-{{template "admin/public/left.html" .}}
-<!-- 右侧内容 -->
-<div class="layui-body layui-form">
-    <div class="layui-tab marg0" lay-filter="bodyTab">
-        <ul class="layui-tab-title top_tab">
-            <li class="layui-this" lay-id=""><i class="iconfont icon-computer"></i> <cite>后台首页</cite></li>
-        </ul>
-        <div class="layui-tab-content clildFrame">
-            <div class="layui-tab-item layui-show">
-                <iframe src="{{urlfor "AindexController.main"}}"></iframe>
+<div class="row">
+    <div class="col-lg-6 col-xl-3 col-md-6 col-sm-6 col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="dash1">
+                            <h4 class="text-dark">675</h4>
+                            <small class="text-muted ">Posts</small>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div id="chart1" class="overflow-hidden"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-xl-3 col-md-6 col-sm-6 col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="dash1">
+                            <h4 class="text-dark">875</h4>
+                            <small class="text-muted">Clicks</small>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div id="chart2" class="overflow-hidden"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-xl-3 col-md-6 col-sm-6 col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="dash1">
+                            <h4 class="text-dark">976</h4>
+                            <small class="text-muted">Shares</small>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div id="chart3" class="overflow-hidden"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-xl-3 col-md-6 col-sm-6 col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="dash1">
+                            <h4 class="text-dark">418</h4>
+                            <small class="text-muted">Remarks</small>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div id="chart4" class="overflow-hidden"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-{{template "admin/public/footer.html" .}}
+
+
+
+<div class="row ">
+    <div class="col-lg-12 col-xl-6 col-md-12 col-12 col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Monthly Sales</h4>
+            </div>
+            <div class="card-body">
+                <div id="bar-chart" class="overflow-hidden" > </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 col-xl-6 col-md-12 col-12 col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Yearly Template Sales</h4>
+            </div>
+            <div class="card-body">
+                <div id="sales-chart" class="overflow-hidden"> </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Account Retention</h4>
+            </div>
+            <div class="card-body">
+                <div id="index" class="overflow-hidden h-400 mx-auto text-center " ></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12 col-xl-8 col-md-12 col-12 col-sm-12">
+        <div class="card">
+        <div class="pt-0 pb-0 pl-3 pr-3 card-body">
+            <div class="row">
+                <div class="col-xs-12 col-lg-5 cover-image weather-radius text-center position-relative transparent" data-image-src="/static/admin/img/weather.jpg">
+                    <div class="weather-shade">
+                        <i class="wi wi-day-sleet text-white"></i>
+                    </div>
+                    <div class="card-body mt-5 pt-5">
+                        <i class="vl_weather-day-rain text-light  mt-5 pt-5 d-block"></i>
+                    </div>
+                    <div class="bg-transparent border-0 text-light  pt-4">
+                        <h3 class="weight300">Sunny Day</h3>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-lg-7 widgetb p-0">
+                    <div class="card-body p-4">
+                        <h4 class="mb-0">MONDAY <br/>
+                            <span class="text-muted h5"> 22  October</span>
+                        </h4>
+                        <div class="fs-45 text-primary pt-4 ">
+                            32<sup>o</sup>
+                            <span class="h3 ">Sunny</span>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white text-center ">
+                        <div class="row">
+                            <div class="col-sm-2 col-4 mt-2 pb-2">
+                                <h6 class="text-muted mb-3">TUE</h6>
+                                <i class="fe fe-cloud-rain"></i>
+                                <p class="mb-0 text-muted">18<sup>o</sup>c</p>
+                            </div>
+                            <div class="col-sm-2 col-4 mt-2 pb-2">
+                                <h6 class="text-muted mb-3">WED</h6>
+                                <i class="fe fe-cloud"></i>
+                                <p class="mb-0 text-muted">22<sup>o</sup>c</p>
+                            </div>
+                            <div class="col-sm-2 col-4 mt-2 pb-2">
+                                <h6 class="text-muted mb-3">THU</h6>
+                                <i class="fe fe-cloud-snow"></i>
+                                <p class="mb-0 text-muted">15<sup>o</sup>c</p>
+                            </div>
+                            <div class="col-sm-2 col-4 mt-2 pb-2">
+                                <h6 class="text-muted mb-3">FRI</h6>
+                                <i class="fe fe-cloud-rain"></i>
+                                <p class="mb-0 text-muted">19<sup>o</sup>c</p>
+                            </div>
+                            <div class="col-sm-2 col-4 mt-2 pb-2">
+                                <h6 class="text-muted mb-3">SAT</h6>
+                                <i class="fe fe-cloud"></i>
+                                <p class="mb-0 text-muted">29<sup>o</sup>c</p>
+                            </div>
+                            <div class="col-sm-2 col-4 mt-2 pb-2">
+                                <h6 class="text-muted mb-3">SUN</h6>
+                                <i class="fe fe-cloud-snow"></i>
+                                <p class="mb-0 text-muted">17<sup>o</sup>c</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12 col-xl-4 col-md-12 col-12 col-sm-12">
+        <div class="card">
+            <div id="calendar-1"></div>
+        </div>
+    </div>
+</div>
+
+{{template "admin/public/js.html"}}
+<!--Dashboard js-->
+<script src="/static/admin/js/dashboard.js"></script>
+{{template "admin/public/footer.html"}}

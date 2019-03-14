@@ -21,6 +21,11 @@ func init() {
     //后台用户处理的操作
     beego.Router("/admin/index", &controllers.AindexController{},"*:Index")
     beego.Router("/admin/main", &controllers.AindexController{},"*:Main")
-    beego.Router("/admin/info", &controllers.AindexController{},"*:Info")
+    //前台用户显示
+    beego.Router("/admin/hlist", &controllers.AuserController{},"*:Hlist")
+    //前台用户编辑页面
+    beego.Router("/admin/hedit/?:id", &controllers.AuserController{},"Get:Hedit")
+    //前台用户的编辑删除操作
+    beego.Router("/home/hstatus", &controllers.AuserController{},"Post:Hstatus")
 
 }

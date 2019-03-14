@@ -9,7 +9,8 @@ type Huser struct {
 	Username string
 	Mobile string 
 	Status int
-	Addtime time.Time
+	Addtime time.Time `orm:"auto_now_add;type(datetime)"`
+	Endtime time.Time `orm:"auto_now_add;type(datetime)"`
 }
 
 func (m *Huser) TableName() string {

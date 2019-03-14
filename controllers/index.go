@@ -19,5 +19,5 @@ func (c *IndexController) Index(){
 //测试数据库的操作
 func (c *IndexController) Ches(){
 	fmt.Println("车上")
-	c.Ctx.WriteString("11hello,执行数据测试的操作")
+	c.Ctx.WriteString("hello,执行数据测试的操作")
 }

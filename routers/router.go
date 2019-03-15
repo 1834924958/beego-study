@@ -27,5 +27,8 @@ func init() {
     beego.Router("/admin/hedit/?:id", &controllers.AuserController{},"Get:Hedit")
     //前台用户的编辑删除操作
     beego.Router("/home/hstatus", &controllers.AuserController{},"Post:Hstatus")
-
+    //执行管理员用户的操作
+    beego.Router("/admin/alist", &controllers.AuserController{},"*:Alist")
+    beego.Router("/admin/aedit/?:id", &controllers.AuserController{},"Get:Aedit")
+    beego.Router("/home/astatus", &controllers.AuserController{},"Post:Astatus")
 }

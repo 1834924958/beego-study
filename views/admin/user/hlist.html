@@ -5,7 +5,17 @@
 		<div class="col-lg-12">
 			<div class="card">
 				<div class="card-header">
-					<h4>Headercolor Table</h4>
+				<div class="float-right">
+					<form >
+						<div class="input-group">
+							<input type="text" class="form-control"  id="search" placeholder="请输入用户名">
+							<div class="input-group-btn">
+								<button class="btn btn-primary" onclick="Search();"><i class="ion ion-search"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>
+					<h4>用户列表</h4>
 				</div>
 				<div class="card-body">
 					<div class="table-responsive">
@@ -47,17 +57,34 @@
 {{template "admin/public/js.html"}}
 <script src="/static/layer/layer.js"></script>
 <script type="text/javascript">
-function Update(Id){
-	layer.confirm('你确定要删除吗?',{btn:['确定','取消']},function(){
-		$.post("{{urlfor "AuserController.Hstatus"}}",{types:"hdelete",Id:Id},function(data){
-			if(data.code == 1){
-				layer.msg(data.msg,{icon:1});
-				setTimeout("location.reload()",2000)
-			}else{
-				layer.msg(data.msg,{icon:2});
-			}
-		});
-    });
-}
+	//执行搜索的操作
+	function Search(){
+		var search = $("#search").val();
+		// var status   = $('#Status option:selected').val()
+		$.ajax({
+            url:"{{urlfor "AuserController.Hlist"}}",
+            type:'GET', 
+            data:{
+                "search":search
+            },
+            dataType:'json',
+            error:function(){
+                layer.msg("出错了");
+            }
+        })
+	}
+	//执行删除的操作
+	function Update(Id){
+		layer.confirm('你确定要删除吗?',{btn:['确定','取消']},function(){
+			$.post("{{urlfor "AuserController.Hstatus"}}",{types:"hdelete",Id:Id},function(data){
+				if(data.code == 1){
+					layer.msg(data.msg,{icon:1});
+					setTimeout("location.reload()",2000)
+				}else{
+					layer.msg(data.msg,{icon:2});
+				}
+			});
+	    });
+	}
 </script>
 {{template "admin/public/footer.html"}}

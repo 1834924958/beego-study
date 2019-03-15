@@ -61,20 +61,20 @@
 		var mobile   = $("#mobile").val();
 		var status   = $('#Status option:selected').val()
 		$.ajax({
-            url:"{{urlfor "AuserController.Hstatus"}}",
+            url:"{{urlfor "AuserController.Astatus"}}",
             type:'POST', 
             data:{
-                "Id":{{.hlist.Id}},
+            	"Id":{{.hlist.Id}}
                 "Username":username,
                 "Mobile":mobile,
-                "types":"hedit",
+                "types":"aregister",
                 "Status":status
             },
             dataType:'json',
             success:function(data){
                 if(data.code==1){
                     layer.msg(data.msg,{icon:1});
-                }else{
+                }else
                    layer.msg(data.msg,{icon:2});
                 }
             },

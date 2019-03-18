@@ -31,4 +31,7 @@ func init() {
     beego.Router("/admin/alist", &controllers.AuserController{},"*:Alist")
     beego.Router("/admin/aedit/?:id", &controllers.AuserController{},"Get:Aedit")
     beego.Router("/home/astatus", &controllers.AuserController{},"Post:Astatus")
+    //管理员登录
+    beego.Router("/admin/login",&controllers.AloginController{},"*:Login")
+    beego.Router("/admin/logout",&controllers.AloginController{},"*:Logout")
 }

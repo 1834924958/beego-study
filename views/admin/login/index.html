@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<title>后台登录</title>
+		<link rel="stylesheet" type="text/css" href="/static/admin/login/css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="/static/admin/login/css/demo.css" />
+		<!--必要样式-->
+		<link rel="stylesheet" type="text/css" href="/static/admin/login/css/component.css" />
+		<link rel="stylesheet" href="/static/layer/theme/default/layer.css">
+
+		<!--[if IE]>
+		<script src="js/html5.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="container demo-1">
+			<div class="content">
+				<div id="large-header" class="large-header">
+					<canvas id="demo-canvas"></canvas>
+					<div class="logo_box">
+						<h3>欢迎您进入后台</h3>
+						<form action="#" name="f" method="post">
+							<div class="input_outer">
+								<span class="u_user"></span>
+								<input name="logname" id = "username"class="text" style="color: #FFFFFF !important" type="text" placeholder="请输入用户名">
+							</div>
+							<div class="input_outer">
+								<span class="us_uer"></span>
+								<input name="logpass" class="text" style="color: #FFFFFF !important; position:absolute; z-index:100;"value="" id="password" type="password" placeholder="请输入密码">
+							</div>
+							<div class="mb2"><a class="act-but submit" href="javascript:;" onclick = "Update();" style="color: #FFFFFF">登录</a></div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="/static/admin/login/js/TweenLite.min.js"></script>
+		<script src="/static/admin/login/js/EasePack.min.js"></script>
+		<script src="/static/admin/login/js/rAF.js"></script>
+		<script src="/static/admin/login/js/demo-1.js"></script>
+		<script src="/static/admin/js/jquery.min.js"></script>
+		<script src="/static/layer/layer.js"></script>
+		<script type="text/javascript">
+			//执行提交的操作
+			function Update(){
+				var username = $("#username").val();
+				var password = $("#password").val();
+				if(username == "" || username == null){
+					layer.msg("请输入用户名",{icon:2})
+					return false;
+				}
+				if(password == "" || password == null){
+					layer.msg("请输入密码",{icon:2})
+					return false;
+				}
+				$.ajax({
+                    url:"{{urlfor "AloginController.Login"}}",
+                    type:'POST', 
+                    data:{
+                        "username":username,
+                        "password":password
+                    },
+                    dataType:'json',
+                    success:function(data){
+                        if(data.code==1){
+                            layer.msg(data.msg,{icon:1});
+							window.location.href='{{ urlfor "AindexController.Index"}}'
+                        }else{
+                            layer.msg(data.msg,{icon:2});
+                        }
+                    },
+                    error:function(){
+                        layer.msg("出错了");
+                    }
+                })
+			}
+		</script>
+	</body>
+</html>

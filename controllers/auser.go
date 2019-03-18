@@ -4,6 +4,7 @@ import (
 	"time"
 	"strconv"
 	"beego-study/models"
+	"beego-study/util"
 	"github.com/astaxie/beego/orm"
 )
 type AuserController struct{
@@ -119,14 +120,20 @@ func (c *AuserController) Aedit() {
 //执行管理员的添加，删除，编辑的操作
 func (c *AuserController) Astatus() {
 	if c.Ctx.Request.Method == "POST" {
+
 		types := c.GetString("types")
 		id := c.GetString("Id")
 		intId,_ := strconv.Atoi(id)
 		o := orm.NewOrm()
 		cases := models.Auser{}
+		// o.QueryTable(new(models.Auser).TableName()).Filter("Username", c.GetString("Username")).One(&cases)
+		// c.Data["json"] = cases
+		// c.ServeJSON()
 		cases.Username = c.GetString("Username")
 		cases.Mobile = c.GetString("Mobile")
 		status,_ := strconv.Atoi(c.GetString("Status"))
+		Password := c.GetString("Password")
+		cases.Password = util.Md5(Password)
 		cases.Status   = status
 		if (types != ""){
 			switch types {
@@ -144,11 +151,19 @@ func (c *AuserController) Astatus() {
 							c.jsonResult("0","无效的ID","")
 					}
 				case "aregister":
-					cases.Createtime   = time.Now()
-					if _,err := o.Insert(&cases);err != nil{
-						c.jsonResult("0","管理员添加失败","")
+					//执行检测用户是否存在不存在
+					o.QueryTable(new(models.Auser).TableName()).Filter("Username", c.GetString("Username")).One(&cases)
+					if c.GetString("Username") == "" {
+						c.jsonResult("0","用户名不能为空","")
+					}else if (cases.Username == c.GetString("Username") && cases.Id != 0) {
+						c.jsonResult("0","用户名已存在","")
 					}else{
-						c.jsonResult("1","管理员添加成功","")
+						cases.Createtime   = time.Now()
+						if _,err := o.Insert(&cases);err != nil{
+							c.jsonResult("0","管理员添加失败","")
+						}else{
+							c.jsonResult("1","管理员添加成功","")
+						}
 					}
 				case "hdelete":
 					cases.Id       = intId

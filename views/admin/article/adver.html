@@ -1,0 +1,75 @@
+{{template "admin/public/header.html"}}
+<link rel="stylesheet" href="/static/layer/theme/default/layer.css">
+<div class="section-body">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="card-header">
+					<div class="float-right">
+						<form >
+							<div class="input-group">
+								<input type="text" class="form-control"  id="search" placeholder="请输入用户名">
+								<div class="input-group-btn">
+									<button class="btn btn-primary"><i class="ion ion-search"></i></button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<h4>广告列表</h4>
+					<a href="{{urlfor "ArticleController.AdverEdit"}}" class="btn btn-info m-b-5 m-t-5">新增</a>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-bordered mb-0 text-nowrap">
+							<tr class="bg-primary">
+								<th>ID</th>
+								<th>广告标题</th>
+								<th>URl</th>
+								<th>添加时间</th>
+								<th>状态</th>
+								<th>操作</th>
+							</tr>
+								{{range $k,$v := .adver}}
+									<tr>
+										<td>{{$v.Id}}</td>
+										<td>{{$v.Title}}</td>
+										<td>{{$v.Url}}</td>
+										<td>{{$v.Createtime}}</td>
+										<td>
+											{{if eq $v.Status 1}}
+												<div class="badge badge-success">正常</div>
+											{{else}}
+												<div class="badge badge-danger">冻结</div>
+											{{end}}
+										</td>
+										<td>
+											<a href="{{urlfor "ArticleController.AdverEdit"}}/?id={{$v.Id}}" class="btn btn-action btn-primary">编辑</a>
+											<a href="javascript:;" onclick="Update({{$v.Id}});" class="btn btn-sm btn-danger m-b-5 m-t-5">删除</a>
+										</td>
+									</tr>
+								{{end}}
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{{template "admin/public/js.html"}}
+<script src="/static/layer/layer.js"></script>
+<script type="text/javascript">
+	//执行删除的操作
+	function Update(Id){
+		layer.confirm('你确定要删除吗?',{btn:['确定','取消']},function(){
+			$.post("{{urlfor "ArticleController.AdverStatus"}}",{types:"hdelete",Id:Id},function(data){
+				if(data.code == 1){
+					layer.msg(data.msg,{icon:1});
+					setTimeout("location.reload()",2000)
+				}else{
+					layer.msg(data.msg,{icon:2});
+				}
+			});
+	    });
+	}
+</script>
+{{template "admin/public/footer.html"}}

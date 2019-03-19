@@ -31,7 +31,17 @@ func init() {
     beego.Router("/admin/alist", &controllers.AuserController{},"*:Alist")
     beego.Router("/admin/aedit/?:id", &controllers.AuserController{},"Get:Aedit")
     beego.Router("/home/astatus", &controllers.AuserController{},"Post:Astatus")
-    //管理员登录
+    //管理员登录和退出
     beego.Router("/admin/login",&controllers.AloginController{},"*:Login")
     beego.Router("/admin/logout",&controllers.AloginController{},"*:Logout")
+    //内容管理的操作
+    //广告列表
+    beego.Router("/admin/adver",&controllers.ArticleController{},"*:Adver")
+    //广告新增,编辑操作
+    beego.Router("/admin/adveredit",&controllers.ArticleController{},"Get:AdverEdit")
+    //广告状态值修改的操作
+    beego.Router("/admin/adverstatus",&controllers.ArticleController{},"Post:AdverStatus")
+    beego.Router("/admin/adverimage",&controllers.ArticleController{},"Post:AdverImage")
+    beego.Router("/admin/aimage",&controllers.ArticleController{},"*:Aimage")
+
 }

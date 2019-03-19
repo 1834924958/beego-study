@@ -1,0 +1,143 @@
+{{template "admin/public/header.html" .}}
+<link rel="stylesheet" href="/static/layer/theme/default/layer.css">
+<link rel="stylesheet" href="/static/layui/css/layui.css">
+<div class="row">
+	<div class="col-lg-12 col-xl-6 col-md-12 col-sm-12">
+		<div class="card">
+			<div class="card-header">
+				<h4>
+					{{if .alist.Id}}
+						广告编辑
+					{{else}}
+						广告添加
+					{{end}}
+				</h4>
+			</div>
+			<div class="card-body">
+				<form class="form-horizontal"  method="POST" enctype="multipart/form-data">
+					{{if .alist.Id}}
+						<div class="form-group row">
+							<label for="inputName" class="col-md-3 col-form-label">广告ID:</label>
+							<div class="col-md-9">
+								<input type="hidden" class="form-control" placeholder="广告Id不做调整" name="Id" value="{{.alist.Id}}" >
+								<input type="text" class="form-control" placeholder="广告Id不做调整"  value="{{.alist.Id}}" disabled="disabled">
+							</div>
+						</div>
+					{{else}}
+					{{end}}
+					<div class="form-group row">
+						<label for="inputEmail3" class="col-md-3 col-form-label">标题:</label>
+						<div class="col-md-9">
+							<input type="text" class="form-control" id="Title" name="Title" {{if .alist.Id}} value="{{.alist.Title}}" {{else}} value="" {{end}}  placeholder="请填写广告标题">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="inputPassword3" class="col-md-3 col-form-label">URl地址:</label>
+						<div class="col-md-9">
+							<input type="text" name="Url" id="Url" {{if .alist.Id}} value="{{.alist.Url}}" {{else}} value="" {{end}} class="form-control"  placeholder="请填写URL地址">
+							<input type="hidden" name="types" value="hedit" class="form-control">
+						</div>
+					</div>
+<!-- 					<div class="form-group row">
+						<label for="inputEmail3" class="col-md-3 col-form-label">图片:</label>
+						<div class="col-md-9">						
+							<input type="file"  name = "Images" class="form-control" id="adverfile">
+						</div>
+					</div> -->
+					<div class="form-group row mb-0">
+						<label class="col-md-3 col-form-label">当前状态</label>
+						<div class="col-md-9">
+							<select class="form-control" name="Status" id="Status">
+								{{if .alist.Id}}
+									<option value="1" {{if eq .alist.Status 1 }}selected="selected"{{end}}>正常</option>
+									<option value="0" {{if eq .alist.Status 0 }}selected="selected"{{end}}>冻结</option>
+								{{else}}
+									<option value="1" >正常</option>
+									<option value="0" >冻结</option>
+								{{end}}
+							</select>
+						</div>
+					</div>
+					<div class="form-group mb-0 mt-2 row justify-ontent-end">
+						<div class="col-md-9">
+							<button type="button" onclick="Update();" class="btn btn-info">确认</button>
+							<button type="button" class="btn btn-primary">取消</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{{template "admin/public/js.html" .}}
+<script src="/static/layer/layer.js"></script>
+<script type="text/javascript">
+	//执行上传图片的操作,选择好图片进行相应
+	// $("#adverfile").change(function(){
+	// 	var fileM=document.querySelector("#adverfile");
+	// 	var fileObj = fileM.files[0];
+ //    	var formData = new FormData();
+ //    	formData.append('file', fileObj);
+	// 	console.log(fileM)
+	// 	console.log(fileObj)
+	// 	console.log(formData)
+	// 	$.ajax({
+ //            url:"{{urlfor "ArticleController.AdverImage"}}",
+ //            type:'POST', 
+ //            data:{	
+ //                "Formdata":"11.jpg"
+ //            },
+ //            dataType:'json',
+ //            success:function(data){
+ //                if(data.code==1){
+ //                    layer.msg(data.msg,{icon:1});
+ //                }else{
+ //                   layer.msg(data.msg,{icon:2});
+ //                }
+ //            },
+ //            error:function(){
+ //                layer.msg("出错了");
+ //            }
+ //        })
+	// })
+	//执行确认提交的操作
+	function Update(){
+		var title = $("#Title").val();
+		var url   = $("#Url").val();
+		var status   = $('#Status option:selected').val()
+		var ids 	 = {{.alist.Id}}
+		var types    = ''
+		var id 		 = ''
+		if(ids == "" || ids == null){
+			types = "aregister"
+			id    = id
+		}else{
+			types = "aedit"
+			id    = ids
+		}
+		$.ajax({
+            url:"{{urlfor "ArticleController.AdverStatus"}}",
+            type:'POST', 
+            data:{	
+            	"Id":id,
+                "Title":title,
+                "Url":url,
+                "types":types,
+                "Status":status
+            },
+            dataType:'json',
+            success:function(data){
+                if(data.code==1){
+                    layer.msg(data.msg,{icon:1});
+					setTimeout("location.reload()",1000)
+                }else{
+                   layer.msg(data.msg,{icon:2});
+                }
+            },
+            error:function(){
+                layer.msg("出错了");
+            }
+        })
+	}
+</script>
+{{template "admin/public/footer.html"}}

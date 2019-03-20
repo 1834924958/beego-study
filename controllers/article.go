@@ -18,10 +18,60 @@ type ArticleController struct {
 
 //执行配置广告管理的操作
 func (c *ArticleController) Adver(){
+	////原始数据
+	// o := orm.NewOrm()
+	// adver := [] *models.Adver{}
+	// o.QueryTable(new(models.Adver).TableName()).OrderBy("-id").All(&adver)
+	// c.Data["adver"] =  adver
+	/*
+	 *执行第一种分页数据的处理(有点问题)
+	 *
+	*/
+	// var (
+	// 	page 		int
+	// 	pagesize 	int =3
+	// 	offset		int
+	// )
+	// keyword := c.GetString("title")
+	// list :=  [] *models.Adver{}
+	// if page,_ = c.GetInt("page");page < 1{
+	// 	page = 1
+	// }
+	// offset = (page - 1) * pagesize
+	// o := orm.NewOrm()
+	// query := o.QueryTable(new(models.Adver).TableName())
+	// //查询所有数据
+	// count,_ := query.Count()
+	// if count > 0 {
+	// 	query.OrderBy("-id").Limit(pagesize,offset).All(&list)
+	// }
+	// c.Data["keyword"] = keyword
+	// c.Data["count"] = count
+	// c.Data["adver"] = list
+	// c.Data["pagebar"] = util.NewPager1(page,int(count),pagesize,fmt.Sprintf("/admin/index.html?keyword=%s", keyword), true)
+	/*
+	 *执行第二种分页
+	 *
+	*/
 	o := orm.NewOrm()
 	adver := [] *models.Adver{}
-	o.QueryTable(new(models.Adver).TableName()).OrderBy("-id").All(&adver)
-	c.Data["adver"] =  adver
+	pa,err := c.GetInt("page")
+	if err != nil{
+		println(err)
+	}
+	//限制每页个数
+	pre_page := 2
+	//获取分页数据
+	query := o.QueryTable(new(models.Adver).TableName())
+	totals,_ := query.Count()
+	res := models.Paginator(pa,pre_page,totals)
+	// userlist := models.LimitList(3,pa)
+	query.OrderBy("-id").Limit(2,pa).All(&adver)
+	c.Data["adver"] = adver
+	c.Data["paginator"] = res
+	c.Data["totals"] = totals
+	// c.Data["json"] = res
+	// c.ServeJSON()
 	c.TplName = "admin/article/adver.html"
 }
 //执行配置广告新增编辑的页面的操作

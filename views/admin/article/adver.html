@@ -1,5 +1,44 @@
 {{template "admin/public/header.html"}}
 <link rel="stylesheet" href="/static/layer/theme/default/layer.css">
+<style>
+  .am-cf{
+    height: 50px;         
+    margin-top: 30px;
+    line-height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    margin-left: 40%;
+  }
+  .am-fr{
+      float: left;
+      line-height: 50px;
+      text-align: center;
+      vertical-align: middle;
+      height: 50px;
+      margin-top: -15px;
+  }
+  .am-pagination{
+    list-style:none;
+    height: 50px;   
+    line-height: 50px;
+    text-align: center;
+    vertical-align: middle;
+  }
+  .am-pagination li{
+    float:left;
+    margin-left: 10px;
+  }
+  .am-pagination li a{
+    text-decoration:none;
+  }
+  .am-jl{
+      float: left;
+      margin-left: 20px;
+  }
+  .am-active{
+      color: #f00;
+  }
+</style>
 <div class="section-body">
 	<div class="row">
 		<div class="col-lg-12">
@@ -49,6 +88,27 @@
 									</tr>
 								{{end}}
 						</table>
+						<!-- 第一种分页(有点问题) -->
+<!-- 						<div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-0">
+						    {{.pagebar}}
+						</div> -->
+						<!-- 第二种分页(有点小问题)-->
+						     <div class="am-cf">
+					            <div class="am-fr">
+					              <ul class="am-pagination">
+					              <li class=""><a href="/admin/adver?page={{.paginator.firstpage}}">«</a></li>
+					              {{range $adver,$page := .paginator.pages}}
+					                <li  {{if eq $.paginator.currpage $page }}class="am-active"{{end}}>
+					                    <a href="/admin/adver?page={{$page}}">{{$page}}</a></li> 
+					              {{end}}
+					                <li><a href="/admin/adver?page={{.paginator.lastpage}}">»</a></li>
+					              </ul>
+					            </div>
+					            <div class="am-jl">
+					                    共{{.totals}}条记录 共记{{.paginator.totalpages}} 页 当前{{.paginator.currpage}}页
+					               </div>   
+					          </div>
+						<!-- 第三种分页()-->
 					</div>
 				</div>
 			</div>

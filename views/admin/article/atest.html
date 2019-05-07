@@ -1,0 +1,129 @@
+{{template "admin/public/header.html" .}}
+<link rel="stylesheet" href="/static/layer/theme/default/layer.css">
+<link rel="stylesheet" href="/static/layui/css/layui.css">
+<div class="row">
+	<div class="col-lg-12 col-xl-6 col-md-12 col-sm-12">
+		<div class="card">
+			<div class="card-header">
+				<h4>
+                    测试配置
+				</h4>
+			</div>
+			<div class="card-body">
+                <form class="form-horizontal"  method="POST" enctype="multipart/form-data">
+                    <div class="card-header">
+                        <h3>
+                            1.文件上传
+                        </h3>
+                    </div>
+                    <br/>
+                    <div class="form-group row">
+						<label for="inputEmail3" class="col-md-3 col-form-label">选择文件:</label>
+						<button type="button" class="layui-btn" id="picImgUpload">
+							<i class="layui-icon">&#xe681;</i>上传视频
+						</button>
+			
+					   <!-- <input type="text" name="pic_url" id="pic_url" lay-verify="" autocomplete="off" placeholder="封面" class="layui-input" value="">
+						<img class="layui-upload-img" src="" onerror="this.src=''" width="100" height="100" id="demo1"> -->
+						<!-- <div class="col-md-9">
+                            <input type="file" class="form-control" id="files" name ="file">
+						</div> -->
+					</div>
+					<!-- <div class="form-group row">
+						<label for="inputEmail3" class="col-md-3 col-form-label">标题:</label>
+						<div class="col-md-9">
+							<input type="text" class="form-control" id="Title" name="Title"  placeholder="请填写广告标题">
+						</div>
+					</div> -->
+					<!-- <div class="form-group row">
+						<label for="inputPassword3" class="col-md-3 col-form-label">URl地址:</label>
+						<div class="col-md-9">
+							<input type="text" name="Url" id="Url"  class="form-control"  placeholder="请填写URL地址">
+							<input type="hidden" name="types" value="hedit" class="form-control">
+						</div>
+					</div> -->
+<!-- 					<div class="form-group row">
+						<label for="inputEmail3" class="col-md-3 col-form-label">图片:</label>
+						<div class="col-md-9">						
+							<input type="file"  name = "Images" class="form-control" id="adverfile">
+						</div>
+					</div> -->
+					<!-- <div class="form-group row mb-0">
+						<label class="col-md-3 col-form-label">当前状态</label>
+						<div class="col-md-9">
+							<select class="form-control" name="Status" id="Status">
+									<option value="1" >正常</option>
+									<option value="0" >冻结</option>
+							</select>
+						</div>
+					</div> -->
+					<div class="form-group mb-0 mt-2 row justify-ontent-end">
+						<div class="col-md-9">
+							<button type="button" onclick="Update();" class="btn btn-info">确认</button>
+							<button type="button" class="btn btn-primary">取消</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{{template "admin/public/js.html" .}}
+<!-- <script src="/static/layer/layer.js"></script> -->
+<script src="/static/layui/layui.js"></script>
+<script type="text/javascript">
+	layui.use('upload', function(){
+      	var upload = layui.upload;
+		//执行实例
+		var uploadImage = upload.render({
+			elem: '#picImgUpload' //绑定元素
+			,method:"post"
+			,url: "/admin/aupload/" //上传接口
+			,exts:"mp4|mov|rmvb|avi" //上传文件格式
+			,accept:'video'//文件类型
+			,field:'upfile'
+			,size:'51200'// <1M //文件大小
+			,done: function(res){
+				console.log(res)
+			//上传完毕回调
+			//   if(res.msg == 'ok'){
+			//         $("#pic_url").val('/'+res.url);
+			//   }
+			}
+			,error: function(){
+			//请求异常回调
+			}
+     	 });
+    });
+	// $("#files").change(function(){
+    //     var file = this.files[0];
+    //     var formData = new FormData();
+    //     formData.append("FILE",file)
+	// 	// var files = document.getElementById("files").files;
+    //     // console.log(files);
+    //     // var formdata = new FormData();
+    //     // formdata.append("upload",files[0])
+    // 	// formData.append('file', fileObj);
+	// 	console.log(formData)
+    //     $.ajax({
+    //         url:"{{urlfor "AtestController.Aimage"}}",
+    //         type:'POST', 
+    //         data:formData,
+    //         contentType:false, 
+    //         processData: false,
+    //         // dataType:'json',
+    //         success:function(data){
+    //             console.log(data)
+    //             if(data.code==1){
+    //                 layer.msg(data.msg,{icon:1});
+    //             }else{
+    //                layer.msg(data.msg,{icon:2});
+    //             }
+    //         },
+    //         error:function(){
+    //             layer.msg("出错了");
+    //         }
+    //     })
+	// })
+</script>
+{{template "admin/public/footer.html"}}

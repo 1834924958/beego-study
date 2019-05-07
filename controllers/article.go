@@ -50,7 +50,7 @@ func (c *ArticleController) Adver(){
 	// c.Data["adver"] = list
 	// c.Data["pagebar"] = util.NewPager1(page,int(count),pagesize,fmt.Sprintf("/admin/index.html?keyword=%s", keyword), true)
 	/*
-	 *执行第二种分页
+	 *执行第二种分页(最后一页有点小瑕疵)
 	 *
 	*/
 	o := orm.NewOrm()
@@ -70,8 +70,10 @@ func (c *ArticleController) Adver(){
 	c.Data["adver"] = adver
 	c.Data["paginator"] = res
 	c.Data["totals"] = totals
-	// c.Data["json"] = res
-	// c.ServeJSON()
+	/*
+	 *执行第三种分页
+	 *
+	*/
 	c.TplName = "admin/article/adver.html"
 }
 //执行配置广告新增编辑的页面的操作

@@ -43,5 +43,9 @@ func init() {
     beego.Router("/admin/adverstatus",&controllers.ArticleController{},"Post:AdverStatus")
     beego.Router("/admin/adverimage",&controllers.ArticleController{},"Post:AdverImage")
     beego.Router("/admin/aimage",&controllers.ArticleController{},"*:Aimage")
+    //执行测试配置的操作
+    beego.Router("/admin/atest",&controllers.AtestController{},"*:Atest")
+    beego.Router("/admin/atimage",&controllers.AtestController{},"*:Aimage")
+    beego.Router("/admin/aupload",&controllers.AtestController{},"*:Upload")
 
 }
